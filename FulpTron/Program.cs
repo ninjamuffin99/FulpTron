@@ -60,7 +60,8 @@ namespace FulpTron
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefix = "fulp"
+                StringPrefix = "fulp",
+                CaseSensitive = false
             });
 
             commands.RegisterCommands<MyCommands>();
