@@ -14,7 +14,7 @@ namespace FulpTron
         [Command("Hi")]
         public async Task Hi(CommandContext ctx)
         {
-            await ctx.RespondAsync($"👋 Hi, {ctx.User.Mention}!");
+            await ctx.RespondAsync($"👋 Hi, {ctx.User.Mention}! u stinky lol");
         }
 
         [Command("Roll")]
