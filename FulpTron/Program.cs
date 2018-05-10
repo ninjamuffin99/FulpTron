@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus.Net.WebSocket;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Interactivity;
 
 namespace FulpTron
 {
@@ -13,6 +14,7 @@ namespace FulpTron
     {
         static DiscordClient discord;
         static CommandsNextModule commands;
+        static InteractivityModule interactivity;
 
         static void Main(string[] args)
         {
@@ -31,6 +33,15 @@ namespace FulpTron
 
 
             discord.SetWebSocketClient<WebSocket4NetClient>();
+
+            discord.UseInteractivity(new InteractivityConfiguration
+            {
+                PaginationBehaviour = TimeoutBehaviour.Ignore,
+                PaginationTimeout = TimeSpan.FromMinutes(5),
+                Timeout = TimeSpan.FromMinutes(2)
+
+            });
+
 
             discord.MessageCreated += async e =>
             {
