@@ -51,6 +51,11 @@ namespace FulpTron
                 {
                     await e.Message.RespondAsync("Yeah I know");
                 }
+
+                if (e.Message.Content.ToLower().StartsWith("shame on you"))
+                {
+                    await e.Message.RespondAsync("**SHAAAAAME!!!**");
+                }
             };
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
