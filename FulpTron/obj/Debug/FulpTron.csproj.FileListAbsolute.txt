@@ -11,3 +11,5 @@ C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\obj\Debug\FulpTron.pdb
 C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.WebSocket.WebSocket4Net.dll
 C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\WebSocket4Net.dll
 C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.WebSocket.WebSocket4Net.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.CommandsNext.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.CommandsNext.xml
