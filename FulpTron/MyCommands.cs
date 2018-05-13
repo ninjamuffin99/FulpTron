@@ -9,8 +9,8 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Entities;
 
-//namespace FulpTron
-//{
+namespace FulpTron
+{
     public class MyCommands
     {
         [Command("Hi")]
@@ -25,13 +25,6 @@ using DSharpPlus.Entities;
                 
                 await ctx.RespondAsync($"Im fine, thank you!");
             }   
-        }
-
-        [Command("lies lies lies")]
-        public async Task lies(CommandContext ctx)
-        {
-            await ctx.RespondAsync($"https://www.youtube.com/watch?v=v6cn0mLJVZY");
-            await ctx.RespondAsync($"yeah!");
         }
 
         [Command("Shame")]
@@ -74,7 +67,7 @@ using DSharpPlus.Entities;
             await ctx.RespondAsync($"🎲 You rolled a: {rnd.Next(min, max)}");
         }
 
-        [Command("poll"), Description("Run a poll with reactions.")]
+        [Command("Poll"), Description("Run a poll with reactions.")]
         public async Task Poll(CommandContext ctx, [Description("How long should the poll last.")] TimeSpan duration, [Description("What options should people have.")] params DiscordEmoji[] options)
         {
             // first retrieve the interactivity module from the client
@@ -115,8 +108,5 @@ using DSharpPlus.Entities;
             // send the paginator
             await interactivity.SendPaginatedMessage(ctx.Channel, ctx.User, lipsum_pages, TimeSpan.FromMinutes(5), TimeoutBehaviour.Delete);
         }
-
-        
     }
-
-//}
+}

@@ -31,7 +31,6 @@ namespace FulpTron
                 LogLevel = LogLevel.Debug
             });
 
-
             discord.SetWebSocketClient<WebSocket4NetClient>();
 
             discord.UseInteractivity(new InteractivityConfiguration
@@ -41,7 +40,6 @@ namespace FulpTron
                 Timeout = TimeSpan.FromMinutes(2)
 
             });
-
 
             discord.MessageCreated += async e =>
             {
@@ -56,6 +54,11 @@ namespace FulpTron
                 {
                     await e.Message.RespondAsync("**SHAAAAAME!!!**");
                 }
+
+                if (e.Message.Content.ToLower().StartsWith("lies lies lies"))
+                {
+                    await e.Message.RespondAsync("https://www.youtube.com/watch?v=v6cn0mLJVZY");
+                }
             };
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
@@ -69,7 +72,5 @@ namespace FulpTron
             await discord.ConnectAsync();
             await Task.Delay(-1);
         }
-
-        
     }
 }
