@@ -9,8 +9,8 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Entities;
 
-namespace FulpTron
-{
+//namespace FulpTron
+//{
     public class MyCommands
     {
         [Command("Hi")]
@@ -24,8 +24,14 @@ namespace FulpTron
             {
                 
                 await ctx.RespondAsync($"Im fine, thank you!");
-            }
-               
+            }   
+        }
+
+        [Command("lies lies lies")]
+        public async Task lies(CommandContext ctx)
+        {
+            await ctx.RespondAsync($"https://www.youtube.com/watch?v=v6cn0mLJVZY");
+            await ctx.RespondAsync($"yeah!");
         }
 
         [Command("Shame")]
@@ -37,8 +43,6 @@ namespace FulpTron
         [Command("NGFollow")]
         public async Task NGFollow(CommandContext ctx, string usr)
         {
-           
-
             if (usr == "TomFulp")
             {
                 await ctx.RespondAsync($"Go follow our glorious leader {usr} on Newgrounds!\nhttps://{usr}.newgrounds.com");
@@ -115,4 +119,4 @@ namespace FulpTron
         
     }
 
-}
+//}
