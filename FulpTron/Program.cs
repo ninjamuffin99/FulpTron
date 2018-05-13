@@ -49,15 +49,20 @@ namespace FulpTron
                 if (e.Message.Content.ToLower().StartsWith("are we talking about tom fulp"))
                     await e.Message.RespondAsync("I **LOVE** talking about Tom Fulp");
 
-                if (e.Message.Content.ToLower().StartsWith("hi") ||
-                    e.Message.Content.ToLower().StartsWith("hi") && 
-                    e.Message.Content.ToLower().EndsWith("tom") ||
-                    e.Message.Content.ToLower().EndsWith("fulp") ||
-                    e.Message.Content.ToLower().EndsWith("tom fulp") ||
-                    e.Message.Content.ToLower().EndsWith("fulperino") ||
-                    e.Message.Content.ToLower().EndsWith("fulpster"))
+                if ((e.Message.Content.ToLower().StartsWith("hi")||
+                    e.Message.Content.ToLower().StartsWith("hey")||
+                    e.Message.Content.ToLower().StartsWith("heya")||
+                    e.Message.Content.ToLower().StartsWith("sup")||
+                    e.Message.Content.ToLower().StartsWith("yo")||
+                    e.Message.Content.ToLower().StartsWith("hello"))&&( 
+                    e.Message.Content.ToLower().EndsWith("tom")||
+                    e.Message.Content.ToLower().EndsWith("fulp")||
+                    e.Message.Content.ToLower().EndsWith("tom fulp")||
+                    e.Message.Content.ToLower().EndsWith("fulperino")||
+                    e.Message.Content.ToLower().EndsWith("fulpster")||
+                    e.Message.Content.ToLower().EndsWith("fulpo")))
                 {
-                    await e.Message.RespondAsync($"👋 Hi friend!");
+                    await e.Message.RespondAsync("Hi friend!");
                 }
 
                 if (e.Message.Content.ToLower().StartsWith("good bot"))
@@ -82,7 +87,10 @@ namespace FulpTron
                     await e.Message.RespondAsync("yeah!\n\nhttps://www.youtube.com/watch?v=v6cn0mLJVZY");
                 }
 
-                if (e.Message.Content.ToLower().EndsWith("loves lolis") || e.Message.Content.ToLower().StartsWith("i love lolis"))
+                if (e.Message.Content.ToLower().EndsWith("loves lolis")|| 
+                    e.Message.Content.ToLower().StartsWith("i love lolis")||
+                    e.Message.Content.ToLower().EndsWith("love lolis")||
+                    e.Message.Content.ToLower().EndsWith("like lolis"))
                 {
                     await e.Message.RespondAsync("me too!");
                     await e.Message.RespondWithFileAsync("images/tomloveslolis.jpg");
@@ -91,6 +99,16 @@ namespace FulpTron
                 if(e.Message.Content.ToLower().StartsWith("i hate lolis"))
                 {
                     await e.Message.RespondAsync(";(");
+                }
+
+                if (e.Message.Content.ToLower().StartsWith("what's monster mashing?"))
+                {
+                    await e.Message.RespondAsync("A good game fool, play it!\n\nhttps://www.newgrounds.com/portal/view/707498");
+                }
+
+                if (e.Message.Content.ToLower().StartsWith("i like trains"))
+                {
+                    await e.Message.RespondAsync("vroom\n\nhttps://www.newgrounds.com/portal/view/581989");
                 }
             };
 
