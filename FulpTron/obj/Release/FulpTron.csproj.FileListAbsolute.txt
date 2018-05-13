@@ -1,0 +1,17 @@
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\FulpTron.exe.config
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\FulpTron.exe
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\FulpTron.pdb
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.CommandsNext.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.Interactivity.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.WebSocket.WebSocket4Net.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\Newtonsoft.Json.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\WebSocket4Net.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.CommandsNext.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.Interactivity.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\DSharpPlus.WebSocket.WebSocket4Net.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Release\Newtonsoft.Json.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\obj\Release\FulpTron.csprojResolveAssemblyReference.cache
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\obj\Release\FulpTron.exe
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\obj\Release\FulpTron.pdb
