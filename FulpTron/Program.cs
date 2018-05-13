@@ -25,7 +25,7 @@ namespace FulpTron
         {
             discord = new DiscordClient(new DiscordConfiguration
             {
-                Token = "MzgxNjA0MjgxOTY4NjIzNjE3.DdWLWg.cbPPqKtmjY1Yp-GaDlu3ZVLmLOM",
+                Token = File.ReadAllText("token.txt"),
                 TokenType = TokenType.Bot,
                 UseInternalLogHandler = true,
                 LogLevel = LogLevel.Debug
