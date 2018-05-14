@@ -10,6 +10,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using Newtonsoft.Json;
 
 namespace FulpTron
@@ -22,20 +23,51 @@ namespace FulpTron
 
         static void Main(string[] args)
         {
-            MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
+            var prog = new Program();
+            prog.RunBotAsync().GetAwaiter().GetResult();
+
+            //MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        static async Task MainAsync(string[] args)
+        public async Task RunBotAsync()
         {
-            discord = new DiscordClient(new DiscordConfiguration
-            {
-                Token = File.ReadAllText("token.txt"),
-                TokenType = TokenType.Bot,
-                UseInternalLogHandler = true,
-                LogLevel = LogLevel.Debug
-            });
+            //Reads the config file
+            var json = "";
+            using (var fs = File.OpenRead("config.json"))
+            using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
+                json = await sr.ReadToEndAsync();
 
+            //reads value from the config
+            //to our client config
+            var cfgjson = JsonConvert.DeserializeObject<ConfigJson>(json);
+            var cfg = new DiscordConfiguration
+            {
+                Token = cfgjson.Token,
+                TokenType = TokenType.Bot,
+
+                AutoReconnect = true,
+                LogLevel = LogLevel.Debug,
+                UseInternalLogHandler = true
+            };
+
+            discord = new DiscordClient(cfg);
             discord.SetWebSocketClient<WebSocket4NetClient>();
+
+            //hooks some events, so we know
+            //whats going on
+            discord.Ready += Client_Ready;
+            discord.GuildAvailable += Client_GuildAvailable;
+            discord.ClientErrored += Client_ClientError;
+
+            var ccfg = new CommandsNextConfiguration
+            {
+                StringPrefix = "fulp",
+                CaseSensitive = false,
+                EnableDms = true,
+                EnableMentionPrefix = true
+            };
+
+            commands = discord.UseCommandsNext(ccfg);
 
             discord.UseInteractivity(new InteractivityConfiguration
             {
@@ -50,17 +82,17 @@ namespace FulpTron
                 if (e.Message.Content.ToLower().StartsWith("are we talking about tom fulp"))
                     await e.Message.RespondAsync("I **LOVE** talking about Tom Fulp");
 
-                if ((e.Message.Content.ToLower().StartsWith("hi")||
-                    e.Message.Content.ToLower().StartsWith("hey")||
-                    e.Message.Content.ToLower().StartsWith("heya")||
-                    e.Message.Content.ToLower().StartsWith("sup")||
-                    e.Message.Content.ToLower().StartsWith("yo")||
-                    e.Message.Content.ToLower().StartsWith("hello"))&&( 
-                    e.Message.Content.ToLower().EndsWith("tom")||
-                    e.Message.Content.ToLower().EndsWith("fulp")||
-                    e.Message.Content.ToLower().EndsWith("tom fulp")||
-                    e.Message.Content.ToLower().EndsWith("fulperino")||
-                    e.Message.Content.ToLower().EndsWith("fulpster")||
+                if ((e.Message.Content.ToLower().StartsWith("hi") ||
+                    e.Message.Content.ToLower().StartsWith("hey") ||
+                    e.Message.Content.ToLower().StartsWith("heya") ||
+                    e.Message.Content.ToLower().StartsWith("sup") ||
+                    e.Message.Content.ToLower().StartsWith("yo") ||
+                    e.Message.Content.ToLower().StartsWith("hello")) && (
+                    e.Message.Content.ToLower().EndsWith("tom") ||
+                    e.Message.Content.ToLower().EndsWith("fulp") ||
+                    e.Message.Content.ToLower().EndsWith("tom fulp") ||
+                    e.Message.Content.ToLower().EndsWith("fulperino") ||
+                    e.Message.Content.ToLower().EndsWith("fulpster") ||
                     e.Message.Content.ToLower().EndsWith("fulpo")))
                 {
                     await e.Message.RespondAsync("Hi friend!");
@@ -89,16 +121,16 @@ namespace FulpTron
                 }
 
 
-                if (e.Message.Content.ToLower().EndsWith("loves lolis")|| 
-                    e.Message.Content.ToLower().StartsWith("i love lolis")||
-                    e.Message.Content.ToLower().EndsWith("love lolis")||
+                if (e.Message.Content.ToLower().EndsWith("loves lolis") ||
+                    e.Message.Content.ToLower().StartsWith("i love lolis") ||
+                    e.Message.Content.ToLower().EndsWith("love lolis") ||
                     e.Message.Content.ToLower().EndsWith("like lolis"))
                 {
                     await e.Message.RespondAsync("me too!");
                     await e.Message.RespondWithFileAsync("images/tomloveslolis.jpg");
                 }
 
-                if(e.Message.Content.ToLower().StartsWith("i hate lolis"))
+                if (e.Message.Content.ToLower().StartsWith("i hate lolis"))
                 {
                     await e.Message.RespondAsync(";(");
                 }
@@ -114,16 +146,42 @@ namespace FulpTron
                 }
             };
 
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration
-            {
-                StringPrefix = "fulp",
-                CaseSensitive = false
-            });
 
-            commands.RegisterCommands<MyCommands>();
 
             await discord.ConnectAsync();
+
             await Task.Delay(-1);
+        }
+
+        private Task Client_Ready(ReadyEventArgs e)
+        {
+            //logs the fact that this event occured
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "FulpTron", "Client is ready to precocess events", DateTime.Now);
+
+            //since method is not async, returns a completed task so that no additional work
+            //is done
+            return Task.CompletedTask;
+        }
+
+        private Task Client_GuildAvailable(GuildCreateEventArgs e)
+        {
+            //pretty much the same shit as Client_Ready()
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "FulpTron", $"Guild available: {e.Guild.Name}", DateTime.Now);
+
+            return Task.CompletedTask;
+        }
+
+
+        private Task Client_ClientError(ClientErrorEventArgs e)
+        {
+            // let's log the details of the error that just 
+            // occured in our client
+            e.Client.DebugLogger.LogMessage(LogLevel.Error, "FulpTron", $"Exception occured: {e.Exception.GetType()}: {e.Exception.Message}", DateTime.Now);
+
+            // since this method is not async, let's return
+            // a completed task, so that no additional work
+            // is done
+            return Task.CompletedTask;
         }
     }
 
