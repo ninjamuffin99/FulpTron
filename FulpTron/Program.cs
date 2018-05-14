@@ -108,9 +108,9 @@ namespace FulpTron
                     await e.Message.RespondAsync("Yeah, I know");
                 }
 
-                if (e.Message.Content.ToLower().StartsWith("shame on you"))
+                if (e.Message.Content.ToLower().StartsWith("shame on you") || e.Message.Content.ToLower().StartsWith(".r34"))
                 {
-                    if (e.Message.Content.Length > 13)
+                    if (e.Message.Content.Length > 13 && !e.Message.Content.ToLower().StartsWith(".r34"))
                     {
                         await e.Message.RespondAsync("**SHAAAAAME on " + new string(e.Message.Content.Skip(13).ToArray()) + "!!!**");
                     }
