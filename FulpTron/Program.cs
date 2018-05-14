@@ -7,8 +7,11 @@ using System.IO;
 using System.Threading.Tasks;
 using DSharpPlus.Net.WebSocket;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity;
+using DSharpPlus.VoiceNext;
+using DSharpPlus.VoiceNext.Codec;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using Newtonsoft.Json;
@@ -20,6 +23,7 @@ namespace FulpTron
         static DiscordClient discord;
         static CommandsNextModule commands;
         static InteractivityModule interactivity;
+        static VoiceNextClient voice;
 
         static void Main(string[] args)
         {
@@ -68,6 +72,7 @@ namespace FulpTron
             };
 
             commands = discord.UseCommandsNext(ccfg);
+
 
             discord.UseInteractivity(new InteractivityConfiguration
             {
@@ -146,7 +151,18 @@ namespace FulpTron
                 }
             };
 
+            commands.CommandExecuted += Commands_CommandExecuted;
+            commands.CommandErrored += Commands_CommandErrored;
+
+
             commands.RegisterCommands<MyCommands>();
+            
+            var voicecfg = new VoiceNextConfiguration
+            {
+                VoiceApplication = VoiceApplication.Music
+            };
+
+            voice = discord.UseVoiceNext(voicecfg);
 
             await discord.ConnectAsync();
 
@@ -182,6 +198,43 @@ namespace FulpTron
             // a completed task, so that no additional work
             // is done
             return Task.CompletedTask;
+        }
+
+
+        private Task Commands_CommandExecuted(CommandExecutionEventArgs e)
+        {
+            // let's log the name of the command and user
+            e.Context.Client.DebugLogger.LogMessage(LogLevel.Info, "ExampleBot", $"{e.Context.User.Username} successfully executed '{e.Command.QualifiedName}'", DateTime.Now);
+
+            // since this method is not async, let's return
+            // a completed task, so that no additional work
+            // is done
+            return Task.CompletedTask;
+        }
+
+        private async Task Commands_CommandErrored(CommandErrorEventArgs e)
+        {
+            // let's log the error details
+            e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "ExampleBot", $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it errored: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);
+
+            // let's check if the error is a result of lack
+            // of required permissions
+            if (e.Exception is ChecksFailedException)
+            {
+                // yes, the user lacks required permissions, 
+                // let them know
+
+                var emoji = DiscordEmoji.FromName(e.Context.Client, ":no_entry:");
+
+                // let's wrap the response into an embed
+                var embed = new DiscordEmbedBuilder
+                {
+                    Title = "Access denied",
+                    Description = $"{emoji} You do not have the permissions required to execute this command.",
+                    Color = new DiscordColor(0xFF0000) // red
+                };
+                await e.Context.RespondAsync("", embed: embed);
+            }
         }
     }
 

@@ -32,3 +32,5 @@ K:\Animations\FulpTron\FulpTron\bin\Debug\DSharpPlus.CommandsNext.xml
 K:\Animations\FulpTron\FulpTron\bin\Debug\DSharpPlus.Interactivity.xml
 K:\Animations\FulpTron\FulpTron\bin\Debug\DSharpPlus.WebSocket.WebSocket4Net.xml
 K:\Animations\FulpTron\FulpTron\bin\Debug\Newtonsoft.Json.xml
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.VoiceNext.dll
+C:\Users\NinjaMuffin\Documents\GitHub\FulpTron\FulpTron\bin\Debug\DSharpPlus.VoiceNext.xml
