@@ -1,0 +1,4 @@
+﻿{
+  "token": ""
+  //config.json is gitignored, so change this example's name to config.json and then the token i think will work 
+}

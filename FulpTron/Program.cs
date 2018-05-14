@@ -10,6 +10,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Entities;
+using Newtonsoft.Json;
 
 namespace FulpTron
 {
@@ -87,6 +88,7 @@ namespace FulpTron
                     await e.Message.RespondAsync("yeah!\n\nhttps://www.youtube.com/watch?v=v6cn0mLJVZY");
                 }
 
+
                 if (e.Message.Content.ToLower().EndsWith("loves lolis")|| 
                     e.Message.Content.ToLower().StartsWith("i love lolis")||
                     e.Message.Content.ToLower().EndsWith("love lolis")||
@@ -124,4 +126,12 @@ namespace FulpTron
             await Task.Delay(-1);
         }
     }
+
+    // this structure will hold data from config.json
+    public struct ConfigJson
+    {
+        [JsonProperty("token")]
+        public string Token { get; private set; }
+    }
+
 }
