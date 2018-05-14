@@ -146,7 +146,7 @@ namespace FulpTron
                 }
             };
 
-            commands.RegisterCommands<MyCommands>;
+            commands.RegisterCommands<MyCommands>();
 
             await discord.ConnectAsync();
 
